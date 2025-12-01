@@ -2,12 +2,13 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 fn main() {
+    task1();
     task2();
 }
 
-fn task1() -> i32 {
-    //let path = "D:/code/repos/aoc/aocrust25/inputFiles/day1input.txt";
-    let path = "/home/djs/docs/projects/adventOfCode/25/aocrust25/inputFiles/day1input.txt";
+fn task1() {
+    let path = "D:/code/repos/aoc/aocrust25/inputFiles/day1input.txt";
+    //let path = "/home/djs/docs/projects/adventOfCode/25/aocrust25/inputFiles/day1inputTest.txt";
     let input = File::open(path).expect("File not found");
     let input = BufReader::new(input);
 
@@ -39,13 +40,11 @@ fn task1() -> i32 {
     }
 
     println!("Task1 Pw: {}", count);
-    return count;
 }
-//7972
 
 fn task2() {
-    //let path = "D:/code/repos/aoc/aocrust25/inputFiles/day1input.txt";
-    let path = "/home/djs/docs/projects/adventOfCode/25/aocrust25/inputFiles/day1input.txt";
+    let path = "D:/code/repos/aoc/aocrust25/inputFiles/day1input.txt";
+    //let path = "/home/djs/docs/projects/adventOfCode/25/aocrust25/inputFiles/day1inputTest.txt";
     let input = File::open(path).expect("File not found");
     let input = BufReader::new(input);
 
@@ -54,11 +53,13 @@ fn task2() {
 
     for line in input.lines() {
         let line = line.expect("Couldnt read line");
+        if line.is_empty() { continue };
         let rot_abs = line[1..].parse::<i32>().unwrap();
 
         if line.starts_with('R') {
             for _i in 0..rot_abs {
                 pos += 1;
+
                 if pos == 100 {
                     pos = 0;
                     count += 1;
@@ -67,16 +68,16 @@ fn task2() {
         } else if line.starts_with('L') {
             for _i in 0..rot_abs {
                 pos -= 1;
+
+                if pos == 0 {
+                    count += 1;
+                }
                 if pos == -1 {
                     pos = 99;
-                    count += 1;
                 }
             }
         }
     }
 
-    println!("Task2 Pw: {}", count + task1());
+    println!("Task2 Pw: {}", count);
 }
-
-//7850
-//7893
