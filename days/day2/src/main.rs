@@ -24,7 +24,7 @@ fn task1() {
         
         for id_step in id[0].parse::<i64>().unwrap()..id[1].parse::<i64>().unwrap()+1 { 
 
-            if is_kinda_mirrored(id_step) {
+            if find_recurrence(id_step) {
                 sum_invalid_id += id_step;
                 println!("range:{} step:{}", range, id_step);
             }
@@ -34,22 +34,22 @@ fn task1() {
     println!("{}", sum_invalid_id);
 }
 
-// fn find_recurrence(id_in:i64) -> bool {
-    // let id = id_in.to_string();
-    // let len = id.len();
-    // if len < 2 { return false; } //cant have recurrences with only 1 char
-// 
-    // for pos in 1..=len / 2 { //try all possible pattern lengths
-        // if len % pos == 0 { //cant be a pattern if length not divisible through pattern
-            // let pattern = &id[0..pos];
-// 
-            // if pattern.repeat(len / pos) == id { //check if repeating pattern is id
-                // return true;
-            // }
-        // }
-    // }
-    // false
-// }
+fn find_recurrence(id_in:i64) -> bool {
+    let id = id_in.to_string();
+    let len = id.len();
+    if len < 2 { return false; } //cant have recurrences with only 1 char
+
+    for pos in 1..=len / 2 { //try all possible pattern lengths
+        if len % pos == 0 { //cant be a pattern if length not divisible through pattern
+            let pattern = &id[0..pos];
+
+            if pattern.repeat(len / pos) == id { //check if repeating pattern is id
+                return true;
+            }
+        }
+    }
+    false
+}
 
 fn is_kinda_mirrored(id_in: i64) -> bool {
     let id = id_in.to_string();
