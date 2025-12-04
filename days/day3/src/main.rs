@@ -1,11 +1,11 @@
 use std::fs;
 
 const PATHWIN: &str = "D:/code/repos/aoc/aocrust25/inputFiles/day3input.txt";
-// const PATHWINTEST: &str = "D:/code/repos/aoc/aocrust25/inputFiles/day3inputTest.txt";
+const PATHWINTEST: &str = "D:/code/repos/aoc/aocrust25/inputFiles/day3inputTest.txt";
 
 fn main() {
-
     task1();
+    task2();
 }
 
 fn task1() {
@@ -46,4 +46,32 @@ fn task1() {
         }
     }
     println!("result: {}", result);
+}
+
+
+fn task2() {
+    let input = fs::read_to_string(PATHWIN).expect("Couldnt read file");
+
+    let mut result: u64 = 0;
+    let jolt_length = 12;
+
+    for line in input.lines() {
+        let length = line.len();
+        let mut del_spots = length - jolt_length;
+        let mut num_stack: Vec<char> = Vec::with_capacity(jolt_length);
+
+        for num in line.chars() {
+            while del_spots > 0 && !num_stack.is_empty() && *num_stack.last().unwrap() < num {
+                num_stack.pop();
+                del_spots -= 1;
+            }
+            num_stack.push(num);
+        }
+
+        num_stack.truncate(jolt_length);
+
+        let result_string: String = num_stack.into_iter().collect();
+        result += result_string.parse::<u64>().expect("");
+    }
+    println!("result2: {}", result);
 }
