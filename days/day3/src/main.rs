@@ -9,7 +9,7 @@ fn main() {
 }
 
 fn task1() {
-    let input = fs::read_to_string(PATHWIN).expect("Couldnt read file");
+    let input = fs::read_to_string(pathwin).expect("couldnt read file");
 
     let mut result: i64 = 0;
     for line in input.lines() {
