@@ -2,6 +2,6 @@
 members = [
     "days/day1",
     "days/day2",
-    "days/day3", "days/day4", "days/day5",
+    "days/day3", "days/day4", "days/day5", "days/day6", "days/day7",
 ]
 resolver = "2"
