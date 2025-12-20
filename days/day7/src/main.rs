@@ -1,10 +1,11 @@
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, BufWriter, Write};
 
-//const PATH: &str = "D:/code/repos/aoc/aocrust25/inputFiles/day5input.txt";
+const PATH: &str = "D:/code/repos/aoc/aocrust25/inputFiles/day7input.txt";
+const outPATH: &str = "D:/code/repos/aoc/aocrust25/inputFiles/day7inputOut.txt";
 // const PATH: &str = "D:/code/repos/aoc/aocrust25/inputFiles/day5inputTest.txt";
-const PATH: &str = "../inputFiles/inputTest.txt";
-const outPATH: &str = "../inputFiles/inputTestOut.txt";
+// const PATH: &str = "../inputFiles/inputTest.txt";
+// const outPATH: &str = "../inputFiles/inputTestOut.txt";
 
 fn main() -> io::Result<()> {
     let input = File::open(PATH)?;
@@ -13,7 +14,7 @@ fn main() -> io::Result<()> {
     let buffer = BufReader::new(input);
     let writer = BufWriter::new(output);
 
-    task1(buffer, writer);
+    task1(buffer, writer)?;
     // task2();
 
     Ok(())
@@ -24,7 +25,7 @@ fn task1(buffer: impl BufRead, mut writer: impl Write) -> io::Result<()> {
     let mut count = 0;
 
     for line_result in buffer.lines() {
-        let mut line_str = line_result?;
+        let line_str = line_result?;
 
         let mut chars: Vec<char> = line_str.chars().collect();
         let len = chars.len();
